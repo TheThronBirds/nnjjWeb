@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+
+body{
+    font-size: 13px;
+    font-family: "微软雅黑","宋体","华文细黑",Arial, Helvetica, sans-serif;
+}
+.ui-datatable .ui-datatable-tfoot>tr>td, .ui-datatable .ui-datatable-data>tr>td{
+    border-bottom: 1px solid #8a7979;
+    border-right: 1px solid #8a7979;
+    word-break: keep-all;white-space:nowrap;
+    height: 400px;
+}
+.ui-datatable .ui-datatable-thead>tr>th{
+     border-bottom: 1px solid #8a7979;
+    border-right: 1px solid #8a7979;
+    border-top: 1px solid #8a7979;
+}
+.ui-datatable-header{
+border-top: 1px solid #8a7979;
+}
+.ui-state-disabled{
+    opacity: 0.7;
+}
+.ui-chkbox-box{
+    border: 1px solid #8a7979 !important;
+}
+.ui-widget-content{
+    border: 0;
+}
+.ui-treetable tbody .ui-treetable-row td{
+    border-right: 1px solid gray;
+}
+.ui-treetable tbody .ui-treetable-row td:last-child{
+    border-right: 0;
+}
+.ui-treetable table{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+.red{
+    color: red !important;
+}
+
+.blue{
+    color: blue !important;
+}
+.yellow{
+    color: #ffb300 !important;
+}
+.green{
+    color: green !important;
+}
+.gray{
+    color:gray !important;
+}
+.DeepSkyBlue{
+    color:deepSkyBlue !important;
+}
+.ui-grid-col-5.calendarNarrow p-calendar .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all.ui-shadow .ui-datepicker-calendar{
+    height: 150px;
+}
+.ui-grid-col-5.calendarNarrow p-calendar table .ui-state-default{
+    height: 20px;
+    width: 32px;
+    text-align: center;
+    padding: 3px;
+}
+tr {
+    height: 32px;
+}
+
+
+.ui-datatable tbody>tr.ui-widget-content.ui-state-highlight {
+    background-color: #DFEBF9;
+    color: #000;
+
+
+}
+
+.ui-widget {
+    font-family: "微软雅黑","宋体","华文细黑",Arial, Helvetica, sans-serif;
+    font-size: 1em; 
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: "微软雅黑","宋体","华文细黑",Arial, Helvetica, sans-serif;
+    font-size: 1em; 
+}

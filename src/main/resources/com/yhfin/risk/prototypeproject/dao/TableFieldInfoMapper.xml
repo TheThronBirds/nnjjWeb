@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.yhfin.risk.prototypeproject.dao.TableFieldInfoMapper">
+    <resultMap id="BaseResultMap"
+        type="com.yhfin.risk.prototypeproject.model.TableFieldInfo">
+        <result column="vc_name" jdbcType="VARCHAR" property="name" />
+        <result column="vc_table_name" jdbcType="VARCHAR" property="tableName" />
+        <result column="vc_enum" jdbcType="VARCHAR" property="enumRemark" />
+        <result column="vc_remark" jdbcType="VARCHAR" property="remark" />
+        <result column="vc_business" jdbcType="INTEGER" property="business" />
+    </resultMap>
+
+
+
+
+    <select id="selectFieldInfo" parameterType="hashmap" resultMap="BaseResultMap">
+        select * from  risk_tablefield_info r where r.vc_table_name = #{tableName}
+        and r.vc_name = #{name}
+    </select>
+    
+    
+    
+    
+
+</mapper>
+

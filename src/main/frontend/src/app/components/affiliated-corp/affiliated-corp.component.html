@@ -1,0 +1,66 @@
+<div *ngIf="maindisplay" style="margin-bottom:20px;">
+<h3 class="first">表基本信息</h3>
+<table id="head" width="100%">
+    <tr><th>中文名称</th><td>{{tabledetail.chName}}</td> <th>中文简称</th><td>{{tabledetail.chShortName}}</td></tr>
+    <tr><th>表名</th><td>{{tabledetail.tableName}}</td> <th>表类型</th><td>{{tabledetail.table_type}}</td></tr>
+    <tr><th>主键</th><td colspan="3">{{tabledetail.primaryKey}}</td> </tr>
+    <tr><th>唯一索引</th><td colspan="3">{{tabledetail.uniqueIndex}}</td></tr>
+    <tr><th>表信息说明</th><td colspan="3">{{tabledetail.details}}</td></tr>
+</table>
+
+
+<h3 class="first">表字段信息</h3>
+<p-table [value]="affs" lazy="true" (onLazyLoad)="lazyload($event)">
+    <ng-template pTemplate="header">
+        <tr>
+            <th width="15%">字段名</th>
+            <th>字段中文名</th>
+            <th>字段单位</th>
+            <th>状态</th>
+            <th width="5%">枚举</th>
+            <th width="5%">备注</th>
+            <th>外部数据来源</th>
+            <th  width="15%">数据来源表</th>
+            <th>存储过程</th>
+            <th>业务</th>
+        </tr>
+    </ng-template>
+
+  <ng-template pTemplate="body" let-field>
+    <tr>
+        <td width="15%">{{field.name}}</td>
+        <td>{{field.chName}}</td>
+        <td>{{field.unit}}</td>
+        <td>{{format_state(field.state)}}</td>
+        <td width="5%"><a (click)="info($event,field.name,field.tableName)" style="color:red">{{format(field.enumRemark)}}</a></td>
+        <td>{{field.remark}}</td>
+        
+        
+        <td>{{field.outDataSource}}</td>
+        <td>{{field.sourceTableName}}</td>
+        <td>{{field.procedure}}</td>
+        <td><a (click)="business($event,field.name,field.tableName)" style="color:red">{{format(field.business)}}</a></td>
+    </tr>
+</ng-template>
+</p-table>
+</div>
+
+<div *ngIf="!maindisplay" style = "width:100%;height:600px">
+    <h2>欢迎使用导数数据库</h2>
+</div>
+
+
+
+<p-dialog header="字段枚举信息" [(visible)]="display1" [modal]="true" [responsive]="true" [height]="400" [width]="500"
+ [minWidth]="200" [minY]="70">
+        <div style="overflow:scroll;height:300px;width:450px;">
+        <p [innerHTML] = "tfinfo.enumRemark"></p>
+        </div>
+</p-dialog>
+
+<p-dialog header="字段业务信息" [(visible)]="display2" [modal]="true" [responsive]="true" [height]="350" [width]="500"
+[minWidth]="200" [minY]="70" >
+       <p>{{tfinfo.business}}</p>
+</p-dialog>
+
+
