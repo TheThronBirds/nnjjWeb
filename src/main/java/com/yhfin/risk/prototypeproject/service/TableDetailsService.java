@@ -14,10 +14,10 @@ package com.yhfin.risk.prototypeproject.service;
 
 import java.util.List;
 
-
 import com.yhfin.risk.prototypeproject.model.TableDetails;
+import com.yhfin.risk.prototypeproject.model.TableModule;
 import com.yhfin.risk.prototypeproject.model.TableName;
-import com.yhfin.risk.prototypeproject.model.User;
+
 
 /**   
  * 包名称： com.yhfin.risk.prototypeproject.service 
@@ -35,5 +35,6 @@ public interface TableDetailsService {
     public List<TableDetails> SelectByTableName(String tableName);
     
     
+    public List<TableName> selectTableName();
     
 }

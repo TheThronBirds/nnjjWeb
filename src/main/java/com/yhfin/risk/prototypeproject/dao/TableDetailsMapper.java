@@ -14,8 +14,8 @@ package com.yhfin.risk.prototypeproject.dao;
 
 import java.util.List;
 
-
 import com.yhfin.risk.prototypeproject.model.TableDetails;
+import com.yhfin.risk.prototypeproject.model.TableModule;
 import com.yhfin.risk.prototypeproject.model.TableName;
 import com.yhfin.risk.prototypeproject.model.User;
 
@@ -34,5 +34,9 @@ public interface TableDetailsMapper {
     
     public List<TableDetails> selectBytableName(String tableName);
     
+    //查询所有表名
+    public List<TableName> selectTableName();
     
+    
+
 }

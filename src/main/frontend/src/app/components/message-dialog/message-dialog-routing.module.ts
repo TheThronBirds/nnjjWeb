@@ -6,7 +6,11 @@ const routes: Routes = [
   {
     path: 'Message',
     component: MessageDialogComponent
+<<<<<<< HEAD
     },
+=======
+  }
+>>>>>>> branch 'master' of https://github.com/TheThronBirds/nnjjWeb.git
 ];
 
 @NgModule({

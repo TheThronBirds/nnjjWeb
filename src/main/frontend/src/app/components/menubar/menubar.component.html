@@ -19,7 +19,7 @@
             <li *ngFor="let table of it.tableNames;let i = index"
               [class.selected]="table === selectedTable"
               (click)="onSelect(table)">
-              <span class="badge" >{{i+1}}</span><a title="{{table.tableName}}"> {{table.chName}}</a>
+              <span class="badge" >{{i+1}}</span><a title="{{table.chName}}">{{table.tableName}}</a>
               
             </li>
           </ul>
@@ -29,20 +29,18 @@
 
 
     <div id="queryroot"  class="{{rootmenu1==2?'':'root-control'}}">
-        <div style="margin-top:30px;">
-        <!--<a href="#/Message">这是查询模块</a>-->
-        <input type="text" align="center" pInputText placeholder="请输入查询关键字">
+        <div style="margin-top:30px;margin-left:20px;">
+        <input type="text" align="center" ng-trim="false" [(ngModel)]="model.searchName" pInputText placeholder="请输入查询关键字">
         
-
             <table>
               <tr>
-                  <p-checkbox name="group1" value="1" label="数据库表" [(ngModel)]="selectedCities" inputId="ny"></p-checkbox>
+                <p-radioButton name="group1" value="1" label="数据库表" [(ngModel)]="model.selectType"></p-radioButton>
               </tr>
               <tr>
-                  <p-checkbox name="group1" value="2" label="数据字段" [(ngModel)]="selectedCities" inputId="sf"></p-checkbox>
+                <p-radioButton name="group1" value="2" label="数据字段" [(ngModel)]="model.selectType"></p-radioButton>
               </tr>
               <tr>
-                  <p-checkbox name="group1" value="3" label="存储过程" [(ngModel)]="selectedCities" inputId="la"></p-checkbox>
+                <p-radioButton name="group1" value="3" label="存储过程" [(ngModel)]="model.selectType"></p-radioButton>
               </tr>
             </table>
 
@@ -52,18 +50,11 @@
     </div>
 
   </div>
-<!--<div style="width:200px;float:left;display:block">
-  <ul class="heroes">class="{{i==1?'menu':'menu1'}}"
-  <li *ngFor="let hero of heroes"
-    [class.selected]="hero === selectedHero"
-    (click)="onSelect(hero)">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
-  </li>
-</ul>
-</div>-->
+
+  
   
   <div style="margin-left:210px;display:block; right:100px; overflow:auto;margin-top:70px;">
-  <app-affiliated-corp [table]="selectedTable" ></app-affiliated-corp>
+  <app-affiliated-corp [table]="selectedTable" [tablesearch]="model"></app-affiliated-corp>
   </div>
 
 

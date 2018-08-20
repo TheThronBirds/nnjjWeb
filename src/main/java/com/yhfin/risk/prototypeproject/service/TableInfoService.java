@@ -13,7 +13,6 @@
 package com.yhfin.risk.prototypeproject.service;
 
 import java.util.List;
-
 import com.yhfin.risk.prototypeproject.model.TableInfo;
 import com.yhfin.risk.prototypeproject.model.TableModule;
 import com.yhfin.risk.prototypeproject.model.TableName;
@@ -26,10 +25,14 @@ import com.yhfin.risk.prototypeproject.model.TableName;
  * 创建时间：2018年8月1日/上午10:05:47
  *     
  */
+
 public interface TableInfoService {
+
     public TableInfo selectByTableName(String tableName);
-    public List<TableName> selectTableName();
-    
     
     public List<TableModule> selectTableByModule();
+    
+    //模糊查询
+    public List<TableInfo> selectByTableName1(String TableName);
+
 }

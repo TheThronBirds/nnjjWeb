@@ -47,5 +47,15 @@
         t.vc_chname as  t_chName from tableModule a
         left join risk_tableinfo t on a.id = t.i_module_id
     </select>
+
+
+    
+    <select id="selectByTableName1" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from  risk_tableinfo r where upper(r.vc_tableName) 
+        like '%'||upper(#{tableName})||'%' or r.vc_chname like '%'||#{tableName}||'%' 
+    </select>
+    
+    
+
 </mapper>
 

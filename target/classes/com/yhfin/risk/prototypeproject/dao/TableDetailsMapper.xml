@@ -25,7 +25,7 @@
 
     </resultMap>
 
-    
+
 
 
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -37,7 +37,10 @@
 	   select * from risk_table_details where vc_table_name = #{tableName,jdbcType=VARCHAR}
 	</select>
 	
-	
+	<select id="selectTableName" resultMap="ResultMap">
+        select rownum as id,a.vc_tablename,a.vc_chname from risk_tableinfo a
+    </select>
+    
 
 </mapper>
 

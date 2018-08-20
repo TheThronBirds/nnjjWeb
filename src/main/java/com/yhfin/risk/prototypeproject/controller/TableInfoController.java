@@ -70,4 +70,19 @@ public class TableInfoController {
         return responseData;         
     }
     
+    @RequestMapping(value="searchTable",method=RequestMethod.GET,produces="application/json;charset=utf-8")
+    @ResponseBody
+    public YhResponseData selectByTableName1(String tableName) {
+        YhResponseData responseData = null;
+        tableName = tableName.trim();
+        try {
+            responseData = YhResponseData.handleSuccess(tableInfoService.selectByTableName1(tableName));
+        }catch (Exception e) {
+            logger.error("selectByTableName",e.getMessage(),e);
+            responseData =YhResponseData.handleError("查询表出错:" + e.getMessage());
+        }
+        
+        return responseData;
+    }
+    
 }

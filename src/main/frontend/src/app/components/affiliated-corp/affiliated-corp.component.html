@@ -1,5 +1,6 @@
-<div *ngIf="maindisplay" style="margin-bottom:20px;">
-<h3 align="center">表基本信息</h3>
+
+<div *ngIf="maindisplay&&maindisplay1" style="margin-bottom:20px;">
+<h3 class="first">表基本信息</h3>
 <table id="head" width="100%">
     <tr><th>中文名称</th><td>{{tabledetail.chName}}</td> <th>中文简称</th><td>{{tabledetail.chShortName}}</td></tr>
     <tr><th>表名</th><td>{{tabledetail.tableName}}</td> <th>表类型</th><td>{{tabledetail.table_type}}</td></tr>
@@ -9,7 +10,7 @@
 </table>
 
 
-<h3 class="first" align="center">表字段信息</h3>
+<h3 class="first">表字段信息</h3>
 <p-table [value]="affs" lazy="true" (onLazyLoad)="lazyload($event)">
     <ng-template pTemplate="header">
         <tr>
@@ -33,7 +34,7 @@
         <td>{{field.unit}}</td>
         <td>{{format_state(field.state)}}</td>
         <td width="5%"><a (click)="info($event,field.name,field.tableName)" style="color:red">{{format(field.enumRemark)}}</a></td>
-        <td><a (click)="remark($event,field.name,field.tableName)" style="color:red">{{format(field.remark)}}</a></td>
+        <td>{{field.remark}}</td>
         
         
         <td>{{field.outDataSource}}</td>
@@ -50,26 +51,39 @@
 </div>
 
 
+<div *ngIf="maindisplay&&!maindisplay1" style = "width:100%;height:600px">
+    <h3 align="center">查询数据</h3>
+    <p-table [value]="tables" lazy="true" (onLazyLoad)="lazyload($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>表名</th>
+                <th>中文名</th>
+                
+            </tr>
+        </ng-template>
+    
+      <ng-template pTemplate="body" let-field>
+        <tr>
+            <td width="15%"><a (click)="searchTable($event,field.chName,field.tableName)" style="color:red">{{field.tableName}}</a></td>
+            <td>{{field.chName}}</td>
+            
+        </tr>
+    </ng-template>
+    </p-table>
+</div>
+
+
 
 <p-dialog header="字段枚举信息" [(visible)]="display1" [modal]="true" [responsive]="true" [height]="400" [width]="500"
  [minWidth]="200" [minY]="70">
-        <div style="overflow-y:auto;height:300px;width:450px;">
+        <div style="overflow:scroll;height:300px;width:450px;">
         <p [innerHTML] = "tfinfo.enumRemark"></p>
         </div>
 </p-dialog>
 
-<p-dialog header="字段业务信息" [(visible)]="display2" [modal]="true" [responsive]="true" [height]="400" [width]="500"
-[minWidth]="200" [minY]="70" [baseZIndex]="10000">
-        <div style="overflow-y:auto;height:300px;width:450px;">
-       <p [innerHTML] = "tfinfo.business"></p>
-       </div>
-</p-dialog>
-
-<p-dialog header="字段备注信息" [(visible)]="display3" [modal]="true" [responsive]="true" [height]="350" [width]="500"
+<p-dialog header="字段业务信息" [(visible)]="display2" [modal]="true" [responsive]="true" [height]="350" [width]="500"
 [minWidth]="200" [minY]="70" >
-        <div style="overflow-y:auto">
-       <p [innerHTML] = "tfinfo.remark"></p>
-       </div>
+       <p>{{tfinfo.business}}</p>
 </p-dialog>
 
 

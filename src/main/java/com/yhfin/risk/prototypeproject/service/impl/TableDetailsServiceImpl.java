@@ -34,14 +34,14 @@ import com.yhfin.risk.prototypeproject.service.TableDetailsService;
  * 创建时间：2018年7月27日/下午3:14:16
  *     
  */
+
 @Service
 public class TableDetailsServiceImpl implements TableDetailsService {
     
     @Autowired
     public TableDetailsMapper TableDetailsDao;
-    /* (non-Javadoc)
-     * @see com.yhfin.risk.prototypeproject.service.UserService#SelectAll()
-     */
+    
+    
     @Override
     public List<TableDetails> SelectAll() {
         // TODO Auto-generated method stub
@@ -53,5 +53,9 @@ public class TableDetailsServiceImpl implements TableDetailsService {
         return TableDetailsDao.selectBytableName(TableName);
     }
     
-
+    @Override
+    public List<TableName> selectTableName(){
+        return TableDetailsDao.selectTableName();
+    }
+    
 }

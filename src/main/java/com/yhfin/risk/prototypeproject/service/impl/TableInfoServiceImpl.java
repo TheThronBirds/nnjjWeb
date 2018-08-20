@@ -23,6 +23,8 @@ import com.yhfin.risk.prototypeproject.model.TableModule;
 import com.yhfin.risk.prototypeproject.model.TableName;
 import com.yhfin.risk.prototypeproject.service.TableInfoService;
 
+import com.yhfin.risk.prototypeproject.service.TableInfoService;
+
 /**   
 
  * 包名称： com.yhfin.risk.prototypeproject.service.impl 
@@ -41,14 +43,14 @@ public class TableInfoServiceImpl implements TableInfoService{
     
     @Override
     public TableInfo selectByTableName(String TableName) {
-        System.out.println();
+
         return tableInfoDao.selectByTableName(TableName);
         
     }
     
     @Override
-    public List<TableName> selectTableName(){
-        return tableInfoDao.selectTableName();
+    public List<TableInfo> selectByTableName1(String TableName){
+        return tableInfoDao.selectByTableName1(TableName);
     }
     
     @Override
