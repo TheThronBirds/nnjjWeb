@@ -83,7 +83,7 @@
 
 <p-dialog header="字段业务信息" [(visible)]="display2" [modal]="true" [responsive]="true" [height]="350" [width]="500"
 [minWidth]="200" [minY]="70" >
-       <p>{{tfinfo.business}}</p>
+<p [innerHTML] = "tfinfo.business"></p>
 </p-dialog>
 
 
