@@ -1,0 +1,48 @@
+server:
+    port: 10101
+spring:
+    profiles:
+      active: dev
+    jackson:
+      time-zone: GMT+8
+      date-format: yyyy-MM-dd
+    application:
+        name: risk-prototype-project
+    cloud:
+      config:
+         label: dev
+         profile: ${config.profile:dev}
+         discovery:
+           enabled: true
+           service-id: ycmp-config-center    
+    datasource:
+       name: test
+       url: jdbc:oracle:thin:@10.71.21.151:1521:jytest
+       username: riskdev
+       password: riskdev_2018
+       #使用druid数据源
+       type: com.alibaba.druid.pool.DruidDataSource
+       driver-class-name: oracle.jdbc.driver.OracleDriver
+       filters: stat
+       maxActive: 20
+       initialSize: 1
+       maxWait: 60000
+       minIdle: 1
+       timeBetweenEvictionRunsMillis: 60000
+       minEvictableIdleTimeMillis: 300000
+       validationQuery: select 'x' from dual
+       testWhileIdle: true
+       testOnBorrow: false
+       testOnReturn: false
+       poolPreparedStatements: true
+       maxOpenPreparedStatements: 20              
+eureka:
+  client:
+    service-url:
+        defaultZone: http://ycmpadmin:ycmpadmin@192.168.72.22:10010/eureka #配置服务注册中心 多个用逗号分隔 
+#        defaultZone: http://ycmpadmin:ycmpadmin@192.168.31.194:10010/eureka #配置服务注册中心 多个用逗号分隔 
+#       defaultZone: http://ycmpadmin:ycmpadmin@eureka.yhfin.club:81/eureka #配置服务注册中心 多个用逗号分隔
+##如果无需使用数据库，请做如下设置，否则将导致监控失败下线. 用数据库则设置为true
+mybatis:
+   datasource:
+     enable: true

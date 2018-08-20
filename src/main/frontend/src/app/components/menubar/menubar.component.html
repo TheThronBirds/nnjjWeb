@@ -1,0 +1,72 @@
+
+<div class="top">
+    <ul class="side-menu">
+      <li>
+        <a (click)="rootmenu(1)" class="{{rootmenu1==1?'side-menu-click':'side-menu-unclick'}}">导航</a>
+      </li>
+
+      <li>
+          <a (click)="rootmenu(2)" class="{{rootmenu1==2?'side-menu-click':'side-menu-unclick'}}">搜索</a>
+      </li>
+    </ul>
+    <div id="serveroot" class="{{rootmenu1==1?'':'root-control'}}">
+      <ul *ngFor="let it of tables">
+      <li class="sidemenuli" (click)="onmenu(it.id)">
+        <a>{{it.chName}}</a>
+      </li>
+      <div class="{{i==it.id?'menu':'menu1'}}">
+        <ul class="heroes">
+            <li *ngFor="let table of it.tableNames;let i = index"
+              [class.selected]="table === selectedTable"
+              (click)="onSelect(table)">
+              <span class="badge" >{{i+1}}</span><a title="{{table.tableName}}"> {{table.chName}}</a>
+              
+            </li>
+          </ul>
+      </div>
+    </ul>
+  </div>
+
+
+    <div id="queryroot"  class="{{rootmenu1==2?'':'root-control'}}">
+        <div style="margin-top:30px;">
+        <!--<a href="#/Message">这是查询模块</a>-->
+        <input type="text" align="center" pInputText placeholder="请输入查询关键字">
+        
+
+            <table>
+              <tr>
+                  <p-checkbox name="group1" value="1" label="数据库表" [(ngModel)]="selectedCities" inputId="ny"></p-checkbox>
+              </tr>
+              <tr>
+                  <p-checkbox name="group1" value="2" label="数据字段" [(ngModel)]="selectedCities" inputId="sf"></p-checkbox>
+              </tr>
+              <tr>
+                  <p-checkbox name="group1" value="3" label="存储过程" [(ngModel)]="selectedCities" inputId="la"></p-checkbox>
+              </tr>
+            </table>
+
+
+            <button pButton type="button" label="查询" (click)="handleClick($event)"></button>
+        </div>
+    </div>
+
+  </div>
+<!--<div style="width:200px;float:left;display:block">
+  <ul class="heroes">class="{{i==1?'menu':'menu1'}}"
+  <li *ngFor="let hero of heroes"
+    [class.selected]="hero === selectedHero"
+    (click)="onSelect(hero)">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+</div>-->
+  
+  <div style="margin-left:210px;display:block; right:100px; overflow:auto;margin-top:70px;">
+  <app-affiliated-corp [table]="selectedTable" ></app-affiliated-corp>
+  </div>
+
+
+
+
+  

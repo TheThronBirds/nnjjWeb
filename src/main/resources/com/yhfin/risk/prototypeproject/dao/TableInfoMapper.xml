@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.yhfin.risk.prototypeproject.dao.TableInfoMapper">
+    <resultMap id="BaseResultMap"
+        type="com.yhfin.risk.prototypeproject.model.TableInfo">
+        <result column="vc_tableName" jdbcType="VARCHAR" property="tableName" />
+        <result column="vc_chName" jdbcType="VARCHAR" property="chName" />
+        <result column="VC_CHSHORTNAME" jdbcType="VARCHAR" property="chShortName" />
+        <result column="VC_PRIMARYKEY" jdbcType="VARCHAR" property="PrimaryKey" />
+        <result column="I_TABLE_TYPE" jdbcType="INTEGER" property="Table_type" />
+        <result column="VC_UNIQUEINDEX" jdbcType="VARCHAR" property="UniqueIndex" />
+        <result column="VC_DETAIL" jdbcType="VARCHAR" property="details" />
+    </resultMap>
+
+    <resultMap id="ResultMap"
+        type="com.yhfin.risk.prototypeproject.model.TableName">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="vc_tablename" jdbcType="VARCHAR" property="tableName" />
+        <result column="vc_chname" jdbcType="VARCHAR" property="chName" />
+    </resultMap>
+    
+    
+    <resultMap type="com.yhfin.risk.prototypeproject.model.TableModule" id="tableModules">
+       <id column="id" property="id"/>
+       <result column="name" property="name"/>
+       <result column="chName" property="chName"/>
+       <collection property="tableNames" ofType="com.yhfin.risk.prototypeproject.model.TableName">
+       
+            <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+            <result column="t_chName" jdbcType="VARCHAR" property="chName" />
+       </collection>
+    </resultMap>
+
+
+    <select id="selectByTableName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from  risk_tableinfo r where r.vc_tableName = #{tableName}
+    </select>
+    
+    <select id="selectTableName" resultMap="ResultMap">
+        select rownum as id,a.vc_tablename,a.vc_chname from RISK_TABLEINFO a
+    </select>
+
+
+    <select id="selectTableByModule" resultMap="tableModules">
+        select a.id,a.name,a.chname as chName,t.vc_tablename as table_name,
+        t.vc_chname as  t_chName from tableModule a
+        left join risk_tableinfo t on a.id = t.i_module_id
+    </select>
+</mapper>
+

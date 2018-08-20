@@ -1,0 +1,250 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.14.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<artifactId>prototype-project</artifactId>
+	<packaging>jar</packaging>
+	<name>prototype-project</name>
+
+	<properties>
+		<!-- java环境 -->
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<javax-validation.version>2.0.1.Final</javax-validation.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<compiler.jdk.version>${java.version}</compiler.jdk.version>
+		<!-- spring boot 额外版本 -->
+		<spring-cloud.version>Edgware.SR3</spring-cloud.version>
+		<!-- Mybatis -->
+		<mybatis-starter-version>1.3.1</mybatis-starter-version>
+        <pagehelper-version>1.2.2</pagehelper-version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<!-- Import dependency management from Spring Cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+<dependency>
+<groupId>org.hibernate</groupId>
+<artifactId>hibernate-validator</artifactId>
+<version>6.0.10.Final</version>
+</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<!-- 赢和通用接口--> 
+		<dependency>
+			<groupId>com.yhfin.framework</groupId>
+			<artifactId>ycmp-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+		
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Spring Boot Mybatis 依赖 -->
+       <dependency>
+           <groupId>org.mybatis.spring.boot</groupId>
+           <artifactId>mybatis-spring-boot-starter</artifactId>
+           <version>${mybatis-starter-version}</version> 
+       </dependency>
+       
+       <!--mybatis 分页组件 start  -->
+      
+        <!--pagehelper 分页-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper-version}</version>
+        </dependency>
+	</dependencies>	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<activation>
+				<!-- <activeByDefault>true</activeByDefault> -->
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<properties>
+				<npm>npm.cmd</npm>
+			</properties>
+
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-maven-plugin</artifactId>
+						</plugin>
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>exec-maven-plugin</artifactId>
+							<executions>
+								<execution>
+									<id>exec-npm-install</id>
+									<phase>generate-sources</phase>
+									<goals>
+										<goal>exec</goal>
+									</goals>
+									<configuration>
+										<executable>${npm}</executable>
+										<arguments>
+											<argument>install</argument>
+										</arguments>
+										<workingDirectory>src/main/frontend</workingDirectory>
+									</configuration>
+								</execution>
+
+								<execution>
+									<id>ng-build-app</id>
+									<phase>generate-sources</phase>
+									<goals>
+										<goal>exec</goal>
+									</goals>
+									<configuration>
+										<executable>cmd</executable>
+										<workingDirectory>src/main/frontend</workingDirectory>
+										<arguments>
+											<argument>/c</argument>
+											<argument>"ng build --prod --aot"</argument>
+										</arguments>
+									</configuration>
+								</execution>
+
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<resources>
+					<resource>
+						<directory>src/main/frontend/dist</directory>
+						<targetPath>static/risk/${project.artifactId}</targetPath>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+				</resources>
+
+			</build>
+		</profile>
+
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>Linux</family>
+				</os>
+			</activation>
+			<properties>
+				<npm>npm</npm>
+			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.5.0</version>
+						<executions>
+							<execution>
+								<id>exec-npm-install</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>${npm}</executable>
+									<arguments>
+										<argument>install</argument>
+									</arguments>
+									<workingDirectory>src/main/frontend</workingDirectory>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>ng-build-app</id>
+								<phase>generate-sources</phase>
+								<configuration>
+									<executable>ng</executable>
+									<workingDirectory>src/main/frontend</workingDirectory>
+									<arguments>
+										<argument> build --prod --aot</argument>
+									</arguments>
+								</configuration>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+
+				<resources>
+					<resource>
+						<directory>src/main/frontend/dist</directory>
+						<targetPath>static/risk/${project.artifactId}</targetPath>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+				</resources>
+
+			</build>
+		</profile>
+	</profiles>
+</project>
