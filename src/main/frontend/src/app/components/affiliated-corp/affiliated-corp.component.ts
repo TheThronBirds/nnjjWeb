@@ -5,12 +5,11 @@ import { Response } from '@angular/http';
 import {DialogModule} from 'primeng/dialog';
 import { BaseModel, BaseSearchModel, Base } from '@yh-frond-frameworks/biz-common';
 import { ButtonService } from '@yh-frond-frameworks/biz-common/button/button.service';
-import { ActivatedRoute } from '@angular/router';
+
 import { tablefieldinfo } from './domain/tablefileldinfo.module';
-import { Hero } from '../../hero';
 import { tabledetails } from './domain/tabledetails';
 import { tableName } from './domain/tableName';
-
+import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-affiliated-corp',
   templateUrl: './affiliated-corp.component.html',
@@ -20,15 +19,17 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
   
 
   @Input() table: tableName = null;
+  @Input() searchTag: number = 0;
   affs: tableinfo[];
 
   tabledetail: tabledetails;
   private tableName?: String;
   display1: boolean = false;//用于控制枚举弹窗
   display2: boolean = false;//用于控制外部数据来源弹窗
-  maindisplay: boolean = true;
   message: String;
   tfinfo: tablefieldinfo;
+  maindisplay: boolean = true;
+  maindisplay1: boolean = true;
 
   CacheTableName:String = null;
   CacheName:String = null;
@@ -38,47 +39,61 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
 
   ngOnChanges(changes: SimpleChanges): void {
     this.maindisplay = true;
-    console.log("进入变化函数" + this.table.tableName);
-    if(this.table == undefined){
-      return;
-    }
-     console.log("有变化" + this.table.tableName);
-     console.log(this.table);
-     //获取表字段信息
-     this.affiliatedCorpService.query(this.table.tableName).subscribe((res: Response) => {
-      let body = JSON.parse(res['_body']);
-      if (body['yhRspType'] == 'ERROR') {
-
-      } else {
-        let data = res.json().data;
-        this.affs = null;
-        this.affs = data;
-
-      }
-
-    }, (res: Response) => {
-      this.showMsg("连接服务器异常" + '!', 'info');
-    });
-
-    //获取表信息
-    this.affiliatedCorpService.queryTable(this.table.tableName).subscribe((res: Response)=>{
-      let body = JSON.parse(res['_body']);
-      this.tabledetail = null;
-      if (body['yhRspType'] == 'ERROR') {
-
-      } else {
-        let data = res.json().data;
-        if(data == null){
-          this.tabledetail = new tabledetails(this.table.tableName);
-        }else{
-          this.tabledetail = data;
+    for(let propName in changes){
+      //查询表变化
+      if(propName == "table"){
+        console.log("进入变化函数" + this.table.tableName);
+        if(this.table == undefined){
+          return;
         }
-        
+         console.log("有变化" + this.table.tableName);
+         console.log(this.table);
+         //获取表字段信息
+         this.affiliatedCorpService.query(this.table.tableName).subscribe((res: Response) => {
+          let body = JSON.parse(res['_body']);
+          if (body['yhRspType'] == 'ERROR') {
+    
+          } else {
+            let data = res.json().data;
+            this.affs = null;
+            this.affs = data;
+    
+          }
+    
+        }, (res: Response) => {
+          this.showMsg("连接服务器异常" + '!', 'info');
+        });
+    
+        //获取表信息
+        this.affiliatedCorpService.queryTable(this.table.tableName).subscribe((res: Response)=>{
+          let body = JSON.parse(res['_body']);
+          this.tabledetail = null;
+          if (body['yhRspType'] == 'ERROR') {
+    
+          } else {
+            let data = res.json().data;
+            if(data == null){
+              this.tabledetail = new tabledetails(this.table.tableName);
+            }else{
+              this.tabledetail = data;
+            }
+            
+          }
+    
+        }, (res: Response) => {
+          this.showMsg("连接服务器异常" + '!', 'info');
+        });
+        this.maindisplay1 = true;  
+      }else if(propName == "searchTag"){
+          console.log("模糊查询");
+          if(this.searchTag == 1){
+            this.maindisplay1 = false;
+          }
+          
       }
-
-    }, (res: Response) => {
-      this.showMsg("连接服务器异常" + '!', 'info');
-    });    
+    }
+    
+      
   }
 
 
@@ -102,6 +117,11 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
     this.table = new tableName();
 
   }
+
+
+
+
+
 
   lazyload(event:any){
     console.log("定时拉取数据");

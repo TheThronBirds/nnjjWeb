@@ -1,4 +1,4 @@
-<div *ngIf="maindisplay" style="margin-bottom:20px;">
+<div *ngIf="maindisplay&&maindisplay1" style="margin-bottom:20px;">
 <h3 class="first">表基本信息</h3>
 <table id="head" width="100%">
     <tr><th>中文名称</th><td>{{tabledetail.chName}}</td> <th>中文简称</th><td>{{tabledetail.chShortName}}</td></tr>
@@ -47,6 +47,11 @@
 
 <div *ngIf="!maindisplay" style = "width:100%;height:600px">
     <h2>欢迎使用导数数据库</h2>
+</div>
+
+
+<div *ngIf="maindisplay&&!maindisplay1" style = "width:100%;height:600px">
+    <h2>查询模块</h2>
 </div>
 
 

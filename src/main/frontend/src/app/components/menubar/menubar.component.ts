@@ -18,10 +18,13 @@ export class MenubarComponent extends Base<BaseModel, BaseSearchModel> implement
   //导航栏控制参数
   rootmenu1:number;
   i:number;
+  selectedCities:String;
+  searchName:String;
 
   tables: tableModule[];
   
     selectedTable: tableName;
+    searchTag: number = 0;
   
     constructor(public buttonService?: ButtonService,public menubarService?: MenubarService,
       public route?: ActivatedRoute) { super(); }
@@ -74,6 +77,17 @@ export class MenubarComponent extends Base<BaseModel, BaseSearchModel> implement
     rootmenu(i:number):void{
       console.log("主目录切换");
       this.rootmenu1 = i;
+    }
+
+
+
+    handleClick(event:any){
+      console.log(this.searchName);
+      console.log(this.selectedCities);
+      if(this.selectedCities == "1"){
+        console.log("666");
+      }
+      this.searchTag = 1;
     }
 
 }
