@@ -12,6 +12,8 @@
  */
 package com.yhfin.risk.prototypeproject.service;
 
+import java.util.List;
+
 import com.yhfin.risk.prototypeproject.model.TableInfo;
 
 /**   
@@ -24,4 +26,7 @@ import com.yhfin.risk.prototypeproject.model.TableInfo;
  */
 public interface TableInfoService {
     public TableInfo selectByTableName(String tableName);
+    
+    //模糊查询
+    public List<TableInfo> selectByTableName1(String TableName);
 }

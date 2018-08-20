@@ -51,7 +51,24 @@
 
 
 <div *ngIf="maindisplay&&!maindisplay1" style = "width:100%;height:600px">
-    <h2>查询模块</h2>
+    <h3 align="center">查询数据</h3>
+    <p-table [value]="tables" lazy="true" (onLazyLoad)="lazyload($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>表名</th>
+                <th>中文名</th>
+                
+            </tr>
+        </ng-template>
+    
+      <ng-template pTemplate="body" let-field>
+        <tr>
+            <td width="15%"><a (click)="searchTable($event,field.chName,field.tableName)" style="color:red">{{field.tableName}}</a></td>
+            <td>{{field.chName}}</td>
+            
+        </tr>
+    </ng-template>
+    </p-table>
 </div>
 
 

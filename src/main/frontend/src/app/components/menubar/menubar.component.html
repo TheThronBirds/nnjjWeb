@@ -29,20 +29,18 @@
 
 
     <div id="queryroot"  class="{{rootmenu1==2?'':'root-control'}}">
-        <div style="margin-top:30px;">
-        <!--<a href="#/Message">这是查询模块</a>-->
-        <input type="text" align="center" [(ngModel)]="searchName" pInputText placeholder="请输入查询关键字">
+        <div style="margin-top:30px;margin-left:20px;">
+        <input type="text" align="center" ng-trim="false" [(ngModel)]="model.searchName" pInputText placeholder="请输入查询关键字">
         
-
             <table>
               <tr>
-                  <p-checkbox name="group1" value="1" label="数据库表" [(ngModel)]="selectedCities" inputId="ny"></p-checkbox>
+                <p-radioButton name="group1" value="1" label="数据库表" [(ngModel)]="model.selectType"></p-radioButton>
               </tr>
               <tr>
-                  <p-checkbox name="group1" value="2" label="数据字段" [(ngModel)]="selectedCities" inputId="sf"></p-checkbox>
+                <p-radioButton name="group1" value="2" label="数据字段" [(ngModel)]="model.selectType"></p-radioButton>
               </tr>
               <tr>
-                  <p-checkbox name="group1" value="3" label="存储过程" [(ngModel)]="selectedCities" inputId="la"></p-checkbox>
+                <p-radioButton name="group1" value="3" label="存储过程" [(ngModel)]="model.selectType"></p-radioButton>
               </tr>
             </table>
 
@@ -56,7 +54,7 @@
   
   
   <div style="margin-left:210px;display:block; right:100px; overflow:auto;margin-top:70px;">
-  <app-affiliated-corp [table]="selectedTable" [searchTag]="searchTag"></app-affiliated-corp>
+  <app-affiliated-corp [table]="selectedTable" [tablesearch]="model"></app-affiliated-corp>
   </div>
 
 

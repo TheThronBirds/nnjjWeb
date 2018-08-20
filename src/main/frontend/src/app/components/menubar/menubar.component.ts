@@ -7,6 +7,7 @@ import { MenubarService } from './menubar.service';
 import { BaseModel, BaseSearchModel, Base } from '@yh-frond-frameworks/biz-common';
 import { tableName } from '../affiliated-corp/domain/tableName';
 import { tableModule } from '../affiliated-corp/domain/tableModule';
+import { tablesearch } from '../affiliated-corp/domain/tablesearch';
 
 @Component({
   selector: 'app-menubar',
@@ -20,11 +21,10 @@ export class MenubarComponent extends Base<BaseModel, BaseSearchModel> implement
   i:number;
   selectedCities:String;
   searchName:String;
-
+  model = new tablesearch(0," ",1);
   tables: tableModule[];
   
     selectedTable: tableName;
-    searchTag: number = 0;
   
     constructor(public buttonService?: ButtonService,public menubarService?: MenubarService,
       public route?: ActivatedRoute) { super(); }
@@ -82,12 +82,7 @@ export class MenubarComponent extends Base<BaseModel, BaseSearchModel> implement
 
 
     handleClick(event:any){
-      console.log(this.searchName);
-      console.log(this.selectedCities);
-      if(this.selectedCities == "1"){
-        console.log("666");
-      }
-      this.searchTag = 1;
+      this.model = new tablesearch(1,this.model.searchName,this.model.selectType);
     }
 
 }

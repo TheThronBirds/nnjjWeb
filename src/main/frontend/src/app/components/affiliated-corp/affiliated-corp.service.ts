@@ -10,6 +10,7 @@ export class AffiliatedCorpService extends BaseService {
   requestUrl: string = "http://localhost:10101/risk/tableSearch";
   requestinfoUrl: String = "http://localhost:10101/risk/TableFieldInfo";
   reuqestTableUrl: String = "http://localhost:10101/risk/tableInfo";
+  requestSearchURl: String = "http://localhost:10101/risk/searchTable";
 
   constructor(protected http: Http) { super(); }
 
@@ -31,5 +32,14 @@ export class AffiliatedCorpService extends BaseService {
     let url = this.reuqestTableUrl + "?tableName=" + tableName;
     console.log("查询表" + tableName + url);
     return this.http.get(url,this.createRequestOption());
+  }
+
+  //查询模块查询表
+  searchtable(tableName:String,searchType:number){
+    if(searchType == 1){
+      let url = this.requestSearchURl + "?tableName=" + tableName;
+      console.log("查询表" + url);
+      return this.http.get(url,this.createRequestOption());
+    }
   }
 }

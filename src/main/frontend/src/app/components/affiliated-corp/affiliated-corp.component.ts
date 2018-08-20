@@ -10,6 +10,7 @@ import { tablefieldinfo } from './domain/tablefileldinfo.module';
 import { tabledetails } from './domain/tabledetails';
 import { tableName } from './domain/tableName';
 import { ActivatedRoute,Router,NavigationEnd } from '@angular/router';
+import { tablesearch } from './domain/tablesearch';
 @Component({
   selector: 'app-affiliated-corp',
   templateUrl: './affiliated-corp.component.html',
@@ -19,8 +20,10 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
   
 
   @Input() table: tableName = null;
-  @Input() searchTag: number = 0;
+  @Input() tablesearch: tablesearch = null;
   affs: tableinfo[];
+
+  tables:tabledetails[];
 
   tabledetail: tabledetails;
   private tableName?: String;
@@ -78,23 +81,41 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
               this.tabledetail = data;
             }
             
+            
           }
     
         }, (res: Response) => {
           this.showMsg("连接服务器异常" + '!', 'info');
         });
         this.maindisplay1 = true;  
-      }else if(propName == "searchTag"){
-          console.log("模糊查询");
-          if(this.searchTag == 1){
-            this.maindisplay1 = false;
+      }else if(propName == "tablesearch"){
+          //模糊查询
+          if(this.tablesearch.selectType == 1){
+            //查询数据库表
+          if(this.tablesearch.selectType == 1){
+            this.affiliatedCorpService.searchtable(this.tablesearch.searchName,this.tablesearch.searchTag).subscribe((res: Response)=>{
+              let body = JSON.parse(res['_body']);
+              if (body['yhRspType'] == 'ERROR') {
+        
+              } else {
+                let data = res.json().data;
+                
+                  console.log("查询成功" + res.json());
+                  this.tables = data;
+                }
+                
+              
+        
+            }, (res: Response) => {
+              this.showMsg("连接服务器异常" + '!', 'info');
+            });
           }
-          
+          this.maindisplay1 = false;
       }
     }
     
       
-  }
+  }}
 
 
   ngOnDestroy(){
@@ -212,8 +233,49 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
     }
   }
 
-  info1(event:any){
-    console.log("这是点击事件");
+
+
+  searchTable(event:any,chName:String,tableName:String){
+    this.affiliatedCorpService.query(tableName).subscribe((res: Response) => {
+      let body = JSON.parse(res['_body']);
+      if (body['yhRspType'] == 'ERROR') {
+
+      } else {
+        let data = res.json().data;
+        this.affs = null;
+        this.affs = data;
+
+      }
+
+    }, (res: Response) => {
+      this.showMsg("连接服务器异常" + '!', 'info');
+    });
+
+    //获取表信息
+    this.affiliatedCorpService.queryTable(tableName).subscribe((res: Response)=>{
+      let body = JSON.parse(res['_body']);
+      this.tabledetail = null;
+      if (body['yhRspType'] == 'ERROR') {
+
+      } else {
+        let data = res.json().data;
+        if(data == null){
+          this.tabledetail = new tabledetails(this.table.tableName);
+        }else{
+          this.tabledetail = data;
+        }
+        
+        
+      }
+
+    }, (res: Response) => {
+      this.showMsg("连接服务器异常" + '!', 'info');
+    });
+    this.maindisplay1 = true;
   }
+
+
+
+
 
 }

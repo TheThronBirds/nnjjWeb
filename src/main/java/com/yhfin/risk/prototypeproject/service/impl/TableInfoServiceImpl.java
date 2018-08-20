@@ -12,6 +12,8 @@
  */
 package com.yhfin.risk.prototypeproject.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,13 @@ public class TableInfoServiceImpl implements TableInfoService{
     
     @Override
     public TableInfo selectByTableName(String TableName) {
-        System.out.println();
+
         return tableInfoDao.selectByTableName(TableName);
         
+    }
+    
+    @Override
+    public List<TableInfo> selectByTableName1(String TableName){
+        return tableInfoDao.selectByTableName1(TableName);
     }
 }

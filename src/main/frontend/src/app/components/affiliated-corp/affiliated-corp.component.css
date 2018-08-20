@@ -16,3 +16,7 @@ table, th , td  {
   classA {
     color:red;
   }
+
+  first {
+    align:center;
+  }

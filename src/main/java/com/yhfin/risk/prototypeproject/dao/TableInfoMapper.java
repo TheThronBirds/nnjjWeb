@@ -12,6 +12,8 @@
  */
 package com.yhfin.risk.prototypeproject.dao;
 
+import java.util.List;
+
 import com.yhfin.risk.prototypeproject.model.TableInfo;
 
 /**   
@@ -24,4 +26,6 @@ import com.yhfin.risk.prototypeproject.model.TableInfo;
  */
 public interface TableInfoMapper {
     public TableInfo selectByTableName(String TableName);
+    //模糊查询
+    public List<TableInfo> selectByTableName1(String TableName);
 }
