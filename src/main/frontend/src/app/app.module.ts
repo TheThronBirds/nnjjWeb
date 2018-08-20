@@ -16,28 +16,6 @@ import { AffiliatedCorpComponent } from './components/affiliated-corp/affiliated
 import { AffiliatedCorpService } from './components/affiliated-corp/affiliated-corp.service';
 import { MenubarService } from './components/menubar/menubar.service';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-//import { MenuComponent } from './components/menu/menu.component';
-
-
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    MenubarComponent,
-    AffiliatedCorpComponent,
-    
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    AppSharedModule,
-    CommonModule
-  ],
-  providers: [AffiliatedCorpService,MenubarService],
-=======
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { AffiliatedCorpModule } from './components/affiliated-corp/affiliated-corp.module';
 import { MessageDialogService } from './components/message-dialog/message-dialog.service';
@@ -61,7 +39,6 @@ import { MessageDialogService } from './components/message-dialog/message-dialog
     CommonModule,
   ],
   providers: [AffiliatedCorpService,MenubarService,MessageDialogService],
->>>>>>> branch 'master' of https://github.com/TheThronBirds/nnjjWeb.git
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
-import {DialogModule} from 'primeng/dialog';
-=======
->>>>>>> branch 'master' of https://github.com/TheThronBirds/nnjjWeb.git
+
+
 
 @Component({
   selector: 'app-root',
