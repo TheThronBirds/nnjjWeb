@@ -1,6 +1,6 @@
 
 <div *ngIf="maindisplay&&maindisplay1" style="margin-bottom:20px;">
-<h3 class="first">表基本信息</h3>
+<h3 class="first" align="center">表基本信息</h3>
 <table id="head" width="100%">
     <tr><th>中文名称</th><td>{{tabledetail.chName}}</td> <th>中文简称</th><td>{{tabledetail.chShortName}}</td></tr>
     <tr><th>表名</th><td>{{tabledetail.tableName}}</td> <th>表类型</th><td>{{tabledetail.table_type}}</td></tr>
@@ -10,7 +10,7 @@
 </table>
 
 
-<h3 class="first">表字段信息</h3>
+<h3 class="first" align="center">表字段信息</h3>
 <p-table [value]="affs" lazy="true" (onLazyLoad)="lazyload($event)">
     <ng-template pTemplate="header">
         <tr>
