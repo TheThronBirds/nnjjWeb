@@ -67,18 +67,6 @@ public class TableDetailsController {
         return responseData;        
     }
     
-    @RequestMapping(value = "/tableName", method = RequestMethod.GET,produces="application/json;charset=utf-8")
-    @ResponseBody
-    public YhResponseData getAllTableName() {
-        YhResponseData responseData = null;
-        try {
-                responseData = YhResponseData.handleSuccess(tableDetailsService.selectTableByModule());
-            
-        } catch (Exception e) {
-            logger.error("getAllTableName error{}",e.getMessage(),e);
-            responseData =YhResponseData.handleError("获取表名出错:" + e.getMessage());
-        }
-        return responseData;        
-    }
+    
     
 }

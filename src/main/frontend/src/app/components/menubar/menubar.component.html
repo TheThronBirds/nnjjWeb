@@ -19,7 +19,7 @@
             <li *ngFor="let table of it.tableNames;let i = index"
               [class.selected]="table === selectedTable"
               (click)="onSelect(table)">
-              <span class="badge" >{{i+1}}</span><a title="{{table.chName}}">{{table.tableName}}</a>
+              <span class="badge" >{{i+1}}</span><a title="{{table.tableName}}">{{table.chName}}</a>
               
             </li>
           </ul>

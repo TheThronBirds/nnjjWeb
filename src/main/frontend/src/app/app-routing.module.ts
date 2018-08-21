@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '',redirectTo: "Message",pathMatch: "full"},
   { path: 'Message',component: MessageDialogComponent},
   { path: 'tableSearch/:tableName',component: AffiliatedCorpComponent}
+
 ];
 
 @NgModule({

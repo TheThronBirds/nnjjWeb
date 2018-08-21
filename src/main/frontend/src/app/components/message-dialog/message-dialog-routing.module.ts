@@ -6,6 +6,7 @@ const routes: Routes = [
   {
     path: 'Message',
     component: MessageDialogComponent
+
   }
 ];
 

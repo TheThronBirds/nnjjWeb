@@ -18,22 +18,11 @@
 		<result column="vc_SourceTableName" jdbcType="VARCHAR" property="SourceTableName" />
 	</resultMap>
 	
-	<resultMap type="com.yhfin.risk.prototypeproject.model.TableModule" id="tableModules">
-	   <id column="id" property="id"/>
-	   <result column="name" property="name"/>
-	   <result column="chName" property="chName"/>
-	   <collection property="tableNames" ofType="com.yhfin.risk.prototypeproject.model.TableName">
-	   
-            <result column="table_name" jdbcType="VARCHAR" property="tableName" />
-            <result column="t_chName" jdbcType="VARCHAR" property="chName" />
-	   </collection>
-	</resultMap>
-	
 	<resultMap id="ResultMap"
         type="com.yhfin.risk.prototypeproject.model.TableName">
-        <result column="t_chName" jdbcType="VARCHAR" property="chName" />
-        <result column="vc_tablename" jdbcType="VARCHAR" property="tableName" />
-        <result column="t_chName" jdbcType="VARCHAR" property="chName" />
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+
     </resultMap>
 
 
@@ -52,12 +41,6 @@
         select rownum as id,a.vc_tablename,a.vc_chname from risk_tableinfo a
     </select>
     
-    
-    <select id="selectTableByModule" resultMap="tableModules">
-        select a.id,a.name,a.chname as chName,t.vc_tablename as table_name,
-        t.vc_chname as  t_chName from tableModule a
-        left join risk_tableinfo t on a.id = t.module_id
-    </select>
 
 </mapper>
 

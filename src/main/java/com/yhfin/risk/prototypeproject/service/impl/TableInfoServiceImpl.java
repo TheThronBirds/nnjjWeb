@@ -19,6 +19,10 @@ import org.springframework.stereotype.Service;
 
 import com.yhfin.risk.prototypeproject.dao.TableInfoMapper;
 import com.yhfin.risk.prototypeproject.model.TableInfo;
+import com.yhfin.risk.prototypeproject.model.TableModule;
+import com.yhfin.risk.prototypeproject.model.TableName;
+import com.yhfin.risk.prototypeproject.service.TableInfoService;
+
 import com.yhfin.risk.prototypeproject.service.TableInfoService;
 
 /**   
@@ -47,5 +51,10 @@ public class TableInfoServiceImpl implements TableInfoService{
     @Override
     public List<TableInfo> selectByTableName1(String TableName){
         return tableInfoDao.selectByTableName1(TableName);
+    }
+    
+    @Override
+    public List<TableModule> selectTableByModule(){
+        return tableInfoDao.selectTableByModule();
     }
 }

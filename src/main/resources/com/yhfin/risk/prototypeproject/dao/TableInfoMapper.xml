@@ -13,12 +13,42 @@
         <result column="VC_DETAIL" jdbcType="VARCHAR" property="details" />
     </resultMap>
 
-
+    <resultMap id="ResultMap"
+        type="com.yhfin.risk.prototypeproject.model.TableName">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="vc_tablename" jdbcType="VARCHAR" property="tableName" />
+        <result column="vc_chname" jdbcType="VARCHAR" property="chName" />
+    </resultMap>
+    
+    
+    <resultMap type="com.yhfin.risk.prototypeproject.model.TableModule" id="tableModules">
+       <id column="id" property="id"/>
+       <result column="name" property="name"/>
+       <result column="chName" property="chName"/>
+       <collection property="tableNames" ofType="com.yhfin.risk.prototypeproject.model.TableName">
+       
+            <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+            <result column="t_chName" jdbcType="VARCHAR" property="chName" />
+       </collection>
+    </resultMap>
 
 
     <select id="selectByTableName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from  risk_tableinfo r where r.vc_tableName = #{tableName}
     </select>
+    
+    <select id="selectTableName" resultMap="ResultMap">
+        select rownum as id,a.vc_tablename,a.vc_chname from RISK_TABLEINFO a
+    </select>
+
+
+    <select id="selectTableByModule" resultMap="tableModules">
+        select a.id,a.name,a.chname as chName,t.vc_tablename as table_name,
+        t.vc_chname as  t_chName from tableModule a
+        left join risk_tableinfo t on a.id = t.i_module_id
+    </select>
+
+
     
     <select id="selectByTableName1" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from  risk_tableinfo r where upper(r.vc_tableName) 

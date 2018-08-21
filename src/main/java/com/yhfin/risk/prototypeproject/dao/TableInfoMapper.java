@@ -15,6 +15,9 @@ package com.yhfin.risk.prototypeproject.dao;
 import java.util.List;
 
 import com.yhfin.risk.prototypeproject.model.TableInfo;
+import com.yhfin.risk.prototypeproject.model.TableModule;
+import com.yhfin.risk.prototypeproject.model.TableName;
+
 
 /**   
  * 包名称： com.yhfin.risk.prototypeproject.dao 
@@ -28,4 +31,6 @@ public interface TableInfoMapper {
     public TableInfo selectByTableName(String TableName);
     //模糊查询
     public List<TableInfo> selectByTableName1(String TableName);
+    
+    public List<TableModule> selectTableByModule();
 }

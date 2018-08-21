@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class MenubarService extends BaseService{
-  requestUrl: string = "http://localhost:10101/risk/tableName";
+
+  requestUrl: string = "http://172.16.33.157:10101/risk/tableName";
+
 
   constructor(protected http: Http) { super(); }
 

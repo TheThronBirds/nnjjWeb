@@ -56,7 +56,19 @@ public class TableInfoController {
         return responseData;
     }
     
-    
+    @RequestMapping(value = "/tableName", method = RequestMethod.GET,produces="application/json;charset=utf-8")
+    @ResponseBody
+    public YhResponseData getAllTableName() {
+        YhResponseData responseData = null;
+        try {
+                responseData = YhResponseData.handleSuccess(tableInfoService.selectTableByModule());
+            
+        } catch (Exception e) {
+            logger.error("getAllTableName error{}",e.getMessage(),e);
+            responseData =YhResponseData.handleError("获取表名出错:" + e.getMessage());
+        }
+        return responseData;         
+    }
     
     @RequestMapping(value="searchTable",method=RequestMethod.GET,produces="application/json;charset=utf-8")
     @ResponseBody

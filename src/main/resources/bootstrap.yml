@@ -17,9 +17,9 @@ spring:
            service-id: ycmp-config-center    
     datasource:
        name: test
-       url: jdbc:oracle:thin:@localhost:1521:orcl
-       username: lzj
-       password: 123
+       url: jdbc:oracle:thin:@10.71.21.151:1521:jytest
+       username: riskdev
+       password: riskdev_2018
        #使用druid数据源
        type: com.alibaba.druid.pool.DruidDataSource
        driver-class-name: oracle.jdbc.driver.OracleDriver

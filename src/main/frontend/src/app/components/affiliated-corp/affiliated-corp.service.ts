@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AffiliatedCorpService extends BaseService {
+
   requestUrl: string = "http://localhost:10101/risk/tableSearch";
   requestinfoUrl: String = "http://localhost:10101/risk/TableFieldInfo";
   reuqestTableUrl: String = "http://localhost:10101/risk/tableInfo";

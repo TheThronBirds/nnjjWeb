@@ -6,6 +6,7 @@ import {DialogModule} from 'primeng/dialog';
 import { BaseModel, BaseSearchModel, Base } from '@yh-frond-frameworks/biz-common';
 import { ButtonService } from '@yh-frond-frameworks/biz-common/button/button.service';
 
+
 import { tablefieldinfo } from './domain/tablefileldinfo.module';
 import { tabledetails } from './domain/tabledetails';
 import { tableName } from './domain/tableName';
@@ -89,8 +90,6 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
         });
         this.maindisplay1 = true;  
       }else if(propName == "tablesearch"){
-          //模糊查询
-          if(this.tablesearch.selectType == 1){
             //查询数据库表
           if(this.tablesearch.selectType == 1){
             this.affiliatedCorpService.searchtable(this.tablesearch.searchName,this.tablesearch.searchTag).subscribe((res: Response)=>{
@@ -111,7 +110,7 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
             });
           }
           this.maindisplay1 = false;
-      }
+      
     }
     
       
@@ -273,9 +272,5 @@ export class AffiliatedCorpComponent extends Base<BaseModel, BaseSearchModel> im
     });
     this.maindisplay1 = true;
   }
-
-
-
-
 
 }

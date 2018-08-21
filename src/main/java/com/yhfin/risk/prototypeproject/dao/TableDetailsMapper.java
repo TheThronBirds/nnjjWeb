@@ -14,7 +14,6 @@ package com.yhfin.risk.prototypeproject.dao;
 
 import java.util.List;
 
-
 import com.yhfin.risk.prototypeproject.model.TableDetails;
 import com.yhfin.risk.prototypeproject.model.TableModule;
 import com.yhfin.risk.prototypeproject.model.TableName;
@@ -38,5 +37,6 @@ public interface TableDetailsMapper {
     //查询所有表名
     public List<TableName> selectTableName();
     
-    public List<TableModule> selectTableByModule();
+    
+
 }
